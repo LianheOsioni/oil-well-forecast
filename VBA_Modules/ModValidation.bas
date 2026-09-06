@@ -210,7 +210,7 @@ Public Function CheckOutputOverwrite(ws As Worksheet, outputCol As Long, outputS
                                      outputEnd As Long, learningEnd As Long) As ValidationResult
     ' Check if output range contains existing data and warn if it overlaps learning data
     
-    Dim lastRow As Long, i As Long
+    Dim lastRow As Long
     
     With CheckOutputOverwrite
         .IsValid = True

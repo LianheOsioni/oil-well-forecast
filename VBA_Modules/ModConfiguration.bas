@@ -112,8 +112,10 @@ Public Sub LoadConfiguration(ByRef config As ConfigSettings)
     ' Load saved configuration from worksheet
     ' If configuration does not exist or is invalid, load defaults
     
-    Dim ws As Worksheet
     Dim configSheet As Worksheet
+    
+    ' Initialize defaults first
+    InitializeDefaults
     
     ' Try to get config sheet; if it doesn't exist, use active sheet
     On Error Resume Next
@@ -321,23 +323,18 @@ Public Function GetConfigSummary(config As ConfigSettings) As String
 End Function
 
 ' ============================================================================
-' UTILITY FUNCTION (moved from ModCore)
+' UTILITY FUNCTIONS
 ' ============================================================================
 
 Public Function ColumnIndexToLetter(col As Long) As String
     ' Convert numeric column index to letter(s)
     Dim result As String
-    Dim originalCol As Long
     
-    originalCol = col
-    
-    ' Handle invalid input
     If col < 1 Then
         ColumnIndexToLetter = "?"
         Exit Function
     End If
     
-    ' Convert to base-26
     result = ""
     Do While col > 0
         result = Chr(64 + ((col - 1) Mod 26) + 1) & result
